@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import ScrollFloat from "@/components/animations/ScrollFloat";
 import { motion } from "framer-motion";
 import { EmblaCarousel } from "../func/Embla-Roll.";
+import { DevYear } from "@/components/func/year";
 
 import {
   FaJava,
@@ -164,7 +164,7 @@ export default function About() {
                   delay={0.2}
                   textClassName="text-lg leading-relaxed text-paleta-rugani-text-secondary font-[family-name:var(--font-inter)] text-left"
                 >
-                  Me chamo Vinícius Rugani, tenho 18 anos e curso Ciência da Computação. Tenho foco em desenvolvimento full-stack, criando soluções práticas e eficientes para todos os públicos
+                  {`Me chamo Vinícius Rugani, tenho ${DevYear()} anos e curso Ciência da Computação. Tenho foco em desenvolvimento full-stack, criando soluções práticas e eficientes para todos os públicos`}
                 </ScrollFloat>
               </div>
             </div>

@@ -1,7 +1,4 @@
 # Portfolio
 
-View here, my personal developer portfolio, with all my projects and more
-(all of this is documented and resumed on my portfolio: projects, about me, and tecnologies that i use & more...)
-
-see the portfolio:
-https://ruganiz.github.io/portfolio/
+Welcome to my personal developer portfolio.
+Here you'll find my projects, the technologies I use, and a little more about me. Everything is documented and summarized in the portfolio.
