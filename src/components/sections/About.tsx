@@ -2,7 +2,7 @@
 
 import ScrollFloat from "@/components/animations/ScrollFloat";
 import { motion } from "framer-motion";
-import { EmblaCarousel } from "../func/Embla-Roll.";
+import Image from "next/image";
 import { DevYear } from "@/components/func/year";
 
 import {
@@ -110,7 +110,13 @@ export default function About() {
                 shadow-[0_20px_80px_rgba(0,0,0,0.45)]
               "
             >
-            <EmblaCarousel />
+              <Image
+                src="/img/developer_icon.png"
+                alt="Vinícius Rugani"
+                fill
+                className="object-cover"
+                priority
+              />
 
               {/* Gradient */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
