@@ -2,6 +2,8 @@
 
 import { ReactNode, useEffect } from "react";
 import Lenis from "lenis";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default function LenisProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
@@ -15,12 +17,14 @@ export default function LenisProvider({ children }: { children: ReactNode }) {
       touchMultiplier: 2,
     });
 
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
+    // Update ScrollTrigger whenever Lenis scrolls
+    lenis.on("scroll", ScrollTrigger.update);
 
-    requestAnimationFrame(raf);
+    // Sync Lenis updates with GSAP's ticker for unified animation frame timing
+    const updateTicker = (time: number) => {
+      lenis.raf(time * 1000);
+    };
+    gsap.ticker.add(updateTicker);
 
     const handleHashClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
@@ -40,6 +44,7 @@ export default function LenisProvider({ children }: { children: ReactNode }) {
 
     return () => {
       document.removeEventListener("click", handleHashClick);
+      gsap.ticker.remove(updateTicker);
       lenis.destroy();
     };
   }, []);

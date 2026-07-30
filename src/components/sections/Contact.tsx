@@ -32,7 +32,7 @@ export default function Contact() {
 
     const formData = new FormData(e.currentTarget);
     try {
-      const res = await fetch("/api/resend", {
+      const res = await fetch("/api/resend/", {
         method: "POST",
         body: formData,
       });

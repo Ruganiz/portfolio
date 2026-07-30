@@ -33,6 +33,7 @@ export default function FadeIn({
         delay,
         ease: [0.21, 0.47, 0.32, 0.98], // Custom ease for smooth theatrics
       }}
+      style={{ willChange: "transform, opacity" }}
       className={className}
     >
       {children}

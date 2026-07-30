@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useEffect, useMemo, useRef, ReactNode, RefObject } from 'react';
+import React, { useMemo, useRef, ReactNode, RefObject } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -52,12 +53,11 @@ const ScrollFloat: React.FC<ScrollFloatProps> = ({
     });
   }, [children]);
 
-  useEffect(() => {
+  useGSAP(() => {
     const el = containerRef.current;
     if (!el) return;
 
-    const scroller = scrollContainerRef && scrollContainerRef.current ? scrollContainerRef.current : window;
-
+    const scroller = scrollContainerRef?.current || window;
     const charElements = el.querySelectorAll('.inline-block');
 
     gsap.fromTo(
@@ -87,7 +87,10 @@ const ScrollFloat: React.FC<ScrollFloatProps> = ({
         }
       }
     );
-  }, [scrollContainerRef, animationDuration, ease, scrollStart, scrollEnd, stagger, scrub, delay]);
+  }, {
+    dependencies: [scrollContainerRef, animationDuration, ease, scrollStart, scrollEnd, stagger, scrub, delay, children],
+    scope: containerRef
+  });
 
   return (
     <Tag ref={containerRef} className={`my-2 flex flex-wrap ${containerClassName}`}>

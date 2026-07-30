@@ -22,11 +22,13 @@ interface Project {
 export default function Projects() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchProjects() {
       try {
-        const response = await fetch("/api/github");
+        setError(null);
+        const response = await fetch("/api/github/");
 
         if (!response.ok) {
           throw new Error("Erro ao buscar projetos");
@@ -37,6 +39,7 @@ export default function Projects() {
         setProjects(data);
       } catch (error) {
         console.error(error);
+        setError("Não foi possível carregar os projetos. Tente novamente mais tarde.");
       } finally {
         setLoading(false);
       }
@@ -155,8 +158,28 @@ export default function Projects() {
           </div>
         )}
 
+        {/* Error State */}
+        {!loading && error && (
+          <div
+            className="
+              flex
+              items-center
+              justify-center
+              rounded-[2rem]
+              border
+              border-red-500/20
+              bg-red-500/5
+              py-20
+              text-center
+              text-red-400
+            "
+          >
+            {error}
+          </div>
+        )}
+
         {/* Empty State */}
-        {!loading && projects.length === 0 && (
+        {!loading && !error && projects.length === 0 && (
           <div
             className="
               flex
